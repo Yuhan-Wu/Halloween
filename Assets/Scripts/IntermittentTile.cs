@@ -6,6 +6,7 @@ public class IntermittentTile : MonoBehaviour
 {
     public float Appear = 0;
     public float Disappear = 0;
+    public int Damage = 0;
 
     private bool Activated = true;
 
@@ -31,5 +32,13 @@ public class IntermittentTile : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = Activated;
         isCoroutineExecuting = false;
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag  == "Player")
+        {
+            other.gameObject.GetComponent<PlayerMovement>().HP -= Damage;
+        }
     }
 }
