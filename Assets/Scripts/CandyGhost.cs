@@ -13,11 +13,17 @@ public class CandyGhost : MonoBehaviour
     private GameObject candy = null;
     [SerializeField]
     private GameObject ghost = null;
+    [SerializeField]
+    private float startChaseDis = 10f;
+    //[SerializeField]
+    //private Transform[] waypoints;
+    //int currentWaypoint = 0;
 
     enum EnemyStates
     {
         Idle,
         Chasing
+        //Patrolling
     }
 
     [SerializeField] EnemyStates currentState;
@@ -29,7 +35,7 @@ public class CandyGhost : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, objectToChase.position) > 10f)
+        if (Vector3.Distance(transform.position, objectToChase.position) > startChaseDis)
         {
             if (currentState == EnemyStates.Chasing)
             {
@@ -52,24 +58,14 @@ public class CandyGhost : MonoBehaviour
             agent.SetDestination(objectToChase.position);
         }
 
-        //if(currentState == EnemyStates.Patrolling)
+        //if (currentState == EnemyStates.Patrolling)
         //{
-        //    if(Vector3.Distance(transform.position, waypoints[currentWaypoint].position) <= 0.6f)
+        //    if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) <= 0.6f)
         //    {
-        //        currentWaypoint++;
-        //        if (currentWaypoint == waypoints.Length)
-        //        {
-        //            currentWaypoint = 0;
-        //        }                
+        //        currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
         //    }
         //    agent.SetDestination(waypoints[currentWaypoint].position);
         //}
-    }
-
-    void SetDestination()
-    {
-        if (currentState == EnemyStates.Chasing)
-            agent.SetDestination(objectToChase.position);
     }
 
     private void OnCollisionEnter(Collision collision)
