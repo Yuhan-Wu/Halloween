@@ -65,6 +65,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         
-        Debug.Log(stamina+" "+speed);
+        //Debug.Log(stamina+" "+speed);
     }
 }
