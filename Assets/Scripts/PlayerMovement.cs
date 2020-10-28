@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public float stamina;
     public StaminaBar staminaBar;
 
+    public int candyCount = 0;
+
     public int HP = 100;
     public int MaxHP = 100;
 
@@ -67,4 +69,17 @@ public class PlayerMovement : MonoBehaviour
         
         //Debug.Log(stamina+" "+speed);
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Candy")
+        {
+            stamina += 1f;
+            candyCount++;
+            Destroy(col.gameObject);
+            Debug.Log(candyCount);
+        }
+    }
+
+    
 }
