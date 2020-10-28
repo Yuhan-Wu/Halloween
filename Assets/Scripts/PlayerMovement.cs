@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     public float maxStamina = 5f;
     public float stamina;
     public StaminaBar staminaBar;
+
+    public int HP = 100;
+    public int MaxHP = 100;
+
     // Start is called before the first frame update
     void Start()
     {
