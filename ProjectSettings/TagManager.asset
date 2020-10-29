@@ -8,6 +8,7 @@ TagManager:
   - Fire
   - Spike
   - Slime
+  - Mirror
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Ghost
+  - Player
   - 
   - 
   - 
