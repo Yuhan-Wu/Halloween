@@ -33,12 +33,4 @@ public class IntermittentTile : MonoBehaviour
         isCoroutineExecuting = false;
         
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag  == "Player")
-        {
-            other.gameObject.GetComponent<PlayerMovement>().HP -= Damage;
-        }
-    }
 }

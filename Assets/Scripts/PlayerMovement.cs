@@ -11,6 +11,14 @@ public class PlayerMovement : MonoBehaviour
     public float maxStamina = 5f;
     public float stamina;
     public StaminaBar staminaBar;
+    public bool Stuck = false;
+    public float OriginalSpeed = 12f;
+    public float StrugglingSpeed = 0.3f;
+    private float LastStrugglingTime = 0;
+    private int StrugglingCounter = 0;
+    public int MaxStruggingCounter = 10;
+    private bool StartStruggling = false;
+    private Slime LastSlime = null;
 
     public int candyCount = 0;
 
@@ -27,47 +35,79 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        staminaBar.SetStamina(stamina);
-
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * speed * Time.deltaTime);
-        if (Input.GetKeyDown(KeyCode.LeftShift)&&(stamina>0))
+        if (Stuck)
         {
-            isRunning = true;
-            
-            
-        }     
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isRunning = false;
-        }
-        if (isRunning)
-        {
-            speed = 20f;
-            stamina -= Time.deltaTime;
-            if (stamina <= 0)
+            LastStrugglingTime += Time.deltaTime;
+            speed = 0;
+            if (LastStrugglingTime > StrugglingSpeed)
             {
-                stamina = 0;
+                StrugglingCounter = 0;
+                LastStrugglingTime = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                StartStruggling = true;
+                LastStrugglingTime = 0;
+            }
+            if(StartStruggling && Input.GetKeyUp(KeyCode.E))
+            {
+                StartStruggling = false;
+                StrugglingCounter++;
+                if (StrugglingCounter > MaxStruggingCounter)
+                {
+                    StrugglingCounter = 0;
+                    Stuck = false;
+                    // Disable slime for a while
+                    if (LastSlime) LastSlime.Disable = true;
+                }
+            }
+        }
+        else
+        {
+            speed = OriginalSpeed;
+
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            staminaBar.SetStamina(stamina);
+
+            Vector3 move = transform.right * x + transform.forward * z;
+
+            controller.Move(move * speed * Time.deltaTime);
+            if (Input.GetKeyDown(KeyCode.LeftShift) && (stamina > 0))
+            {
+                isRunning = true;
+
+
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
                 isRunning = false;
             }
-        }    
-        if (!isRunning)
-        {
-            speed = 12f;
-            if (stamina < maxStamina)
+            if (isRunning)
             {
-                stamina += Time.deltaTime;
+                speed = 20f;
+                stamina -= Time.deltaTime;
+                if (stamina <= 0)
+                {
+                    stamina = 0;
+                    isRunning = false;
+                }
             }
-            else if (stamina >= maxStamina)
+            if (!isRunning)
             {
-                stamina = 5f;
+                speed = 12f;
+                if (stamina < maxStamina)
+                {
+                    stamina += Time.deltaTime;
+                }
+                else if (stamina >= maxStamina)
+                {
+                    stamina = 5f;
+                }
             }
+
+            //Debug.Log(stamina+" "+speed);
         }
-        
-        //Debug.Log(stamina+" "+speed);
     }
 
     void OnTriggerEnter(Collider col)
@@ -78,6 +118,15 @@ public class PlayerMovement : MonoBehaviour
             candyCount++;
             Destroy(col.gameObject);
             Debug.Log(candyCount);
+        }else if (col.gameObject.tag == "Fire" || col.gameObject.tag == "Spike")
+        {
+            IntermittentTile intTile = col.GetComponent<IntermittentTile>();
+            HP -= intTile.Damage;
+        }
+        else if(col.gameObject.tag == "Slime")
+        {
+            LastSlime = col.GetComponent<Slime>();
+            Stuck = true;
         }
     }
 
