@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
-public class CandyGhost : MonoBehaviour
+public class CandyMonster : Monster
 {
     private NavMeshAgent agent;
     [SerializeField]
@@ -13,23 +12,13 @@ public class CandyGhost : MonoBehaviour
     private GameObject candy = null;
     [SerializeField]
     private GameObject ghost = null;
-    [SerializeField]
-    private float startChaseDis = 10f;
     //[SerializeField]
     //private Transform[] waypoints;
     //int currentWaypoint = 0;
 
-    enum EnemyStates
+    protected override void Start()
     {
-        Idle,
-        Chasing
-        //Patrolling
-    }
-
-    [SerializeField] EnemyStates currentState;
-
-    void Start()
-    {
+        base.Start();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -68,12 +57,4 @@ public class CandyGhost : MonoBehaviour
         //}
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            if (currentState == EnemyStates.Chasing)
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5939103651840775835}
   - component: {fileID: 5898705221162415689}
   m_Layer: 0
-  m_Name: CandyGhost
+  m_Name: CandyMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,6 +66,7 @@ MonoBehaviour:
   objectToChase: {fileID: 0}
   candy: {fileID: 490363896727932396}
   ghost: {fileID: 490363896956608479}
+  startChaseDis: 10
   currentState: 0
 --- !u!195 &5898705221162415689
 NavMeshAgent:
@@ -196,7 +197,7 @@ GameObject:
   - component: {fileID: 490363896956608476}
   - component: {fileID: 490363896956608477}
   m_Layer: 0
-  m_Name: ghost
+  m_Name: monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
