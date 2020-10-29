@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 490363896444947563}
   - component: {fileID: 490363896444947540}
-  - component: {fileID: 5939103651840775835}
   - component: {fileID: 5898705221162415689}
+  - component: {fileID: 7496603130696825026}
   m_Layer: 0
   m_Name: CandyMonster
   m_TagString: Untagged
@@ -51,23 +51,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5939103651840775835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490363896444947541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcbc172f40196974d8055a091493b7ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToChase: {fileID: 0}
-  candy: {fileID: 490363896727932396}
-  ghost: {fileID: 490363896956608479}
-  startChaseDis: 10
-  currentState: 0
 --- !u!195 &5898705221162415689
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -90,6 +73,23 @@ NavMeshAgent:
   m_BaseOffset: 1.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7496603130696825026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490363896444947541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbc172f40196974d8055a091493b7ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initState: 0
+  startChaseDis: 10
+  objectToChase: {fileID: 0}
+  candy: {fileID: 490363896727932396}
+  monster: {fileID: 490363896956608479}
 --- !u!1 &490363896727932396
 GameObject:
   m_ObjectHideFlags: 0

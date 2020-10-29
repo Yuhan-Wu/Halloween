@@ -17,6 +17,8 @@ public class Monster : MonoBehaviour
     protected EnemyStates initState;
     [SerializeField]
     protected float startChaseDis = 10f;
+    [SerializeField]
+    protected Transform objectToChase = null;
 
     // Start is called before the first frame update
     protected virtual void Start()

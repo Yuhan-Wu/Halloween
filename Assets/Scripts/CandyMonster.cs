@@ -7,11 +7,9 @@ public class CandyMonster : Monster
 {
     private NavMeshAgent agent;
     [SerializeField]
-    private Transform objectToChase = null;
-    [SerializeField]
     private GameObject candy = null;
     [SerializeField]
-    private GameObject ghost = null;
+    private GameObject monster = null;
     //[SerializeField]
     //private Transform[] waypoints;
     //int currentWaypoint = 0;
@@ -30,7 +28,7 @@ public class CandyMonster : Monster
             {
                 currentState = EnemyStates.Idle;
                 candy.SetActive(true);
-                ghost.SetActive(false);
+                monster.SetActive(false);
                 agent.velocity = Vector3.zero;
                 agent.enabled = false;
             }
@@ -39,7 +37,7 @@ public class CandyMonster : Monster
         {
             if (currentState == EnemyStates.Idle)
             {
-                ghost.SetActive(true);
+                monster.SetActive(true);
                 candy.SetActive(false);
                 currentState = EnemyStates.Chasing;
                 agent.enabled = true;
