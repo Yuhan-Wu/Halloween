@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initState: 0
-  startChaseDis: 20
+  startChaseDis: 10
   objectToChase: {fileID: 0}
   curMirror: {fileID: 0}
-  moveSpeed: 3
+  moveSpeed: 5

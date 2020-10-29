@@ -10,6 +10,8 @@ public class CandyMonster : Monster
     private GameObject candy = null;
     [SerializeField]
     private GameObject monster = null;
+    [SerializeField]
+    private float stopChaseDis = 20f;
     //[SerializeField]
     //private Transform[] waypoints;
     //int currentWaypoint = 0;
@@ -22,7 +24,7 @@ public class CandyMonster : Monster
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, objectToChase.position) > startChaseDis)
+        if (Vector3.Distance(transform.position, objectToChase.position) > stopChaseDis)
         {
             if (currentState == EnemyStates.Chasing)
             {
@@ -35,15 +37,17 @@ public class CandyMonster : Monster
         }
         else
         {
-            if (currentState == EnemyStates.Idle)
+            if (currentState == EnemyStates.Idle && Vector3.Distance(transform.position, objectToChase.position) < startChaseDis)
             {
                 monster.SetActive(true);
                 candy.SetActive(false);
                 currentState = EnemyStates.Chasing;
                 agent.enabled = true;
             }
-            agent.SetDestination(objectToChase.position);
+            if (currentState == EnemyStates.Chasing)
+                agent.SetDestination(objectToChase.position);
         }
+        
 
         //if (currentState == EnemyStates.Patrolling)
         //{
