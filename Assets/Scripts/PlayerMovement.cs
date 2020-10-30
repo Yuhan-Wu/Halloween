@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     private float LastStrugglingTime = 0;
     private int StrugglingCounter = 0;
     public int MaxStruggingCounter = 10;
-    private bool StartStruggling = false;
     private Slime LastSlime = null;
 
     public int candyCount = 0;
@@ -46,12 +45,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
-                StartStruggling = true;
                 LastStrugglingTime = 0;
-            }
-            if(StartStruggling && Input.GetKeyUp(KeyCode.E))
-            {
-                StartStruggling = false;
                 StrugglingCounter++;
                 if (StrugglingCounter > MaxStruggingCounter)
                 {

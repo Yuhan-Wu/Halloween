@@ -9,7 +9,7 @@ public class PatrolMonster : Monster
     [SerializeField]
     private float stopChaseDis = 10f;
     [SerializeField]
-    private Transform[] waypoints;
+    private Transform[] waypoints = null;
     int currentWaypoint = 0;
 
     public float PatrolSpeed = 5;

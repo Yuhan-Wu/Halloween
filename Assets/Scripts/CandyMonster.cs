@@ -47,16 +47,6 @@ public class CandyMonster : Monster
             if (currentState == EnemyStates.Chasing)
                 agent.SetDestination(objectToChase.position);
         }
-        
-
-        //if (currentState == EnemyStates.Patrolling)
-        //{
-        //    if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) <= 0.6f)
-        //    {
-        //        currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
-        //    }
-        //    agent.SetDestination(waypoints[currentWaypoint].position);
-        //}
     }
 
 }
