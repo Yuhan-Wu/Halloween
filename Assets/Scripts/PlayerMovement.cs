@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -133,8 +134,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log(candyCount);
         }else if (col.gameObject.tag == "Fire" || col.gameObject.tag == "Spike")
         {
-            IntermittentTile intTile = col.GetComponent<IntermittentTile>();
-            HP -= intTile.Damage;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else if(col.gameObject.tag == "Slime")
         {
