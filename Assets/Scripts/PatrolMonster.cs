@@ -15,6 +15,8 @@ public class PatrolMonster : Monster
     public float PatrolSpeed = 5;
     public float ChasingSpeed = 10;
 
+    private EnemyStates prevState;
+
     protected override void Start()
     {
         base.Start();
@@ -53,6 +55,26 @@ public class PatrolMonster : Monster
                 
             }
             agent.SetDestination(waypoints[currentWaypoint].position);
+        }
+        if (currentState == EnemyStates.stuck)
+        {
+
+            agent.velocity = Vector3.zero;
+            stuckTime -= Time.deltaTime;
+            if (stuckTime <= 0)
+            {
+                currentState = prevState;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "ShootRocket")
+        {
+            prevState = currentState;
+            currentState = EnemyStates.stuck;
+            Destroy(col.gameObject);
         }
     }
 }

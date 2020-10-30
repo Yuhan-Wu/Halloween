@@ -20,9 +20,15 @@ public class PlayerMovement : MonoBehaviour
     private Slime LastSlime = null;
 
     public int candyCount = 0;
+    public bool ifRocket =false;
 
     public int HP = 100;
     public int MaxHP = 100;
+
+    private bool reviveSpeed = false;
+
+    public GameObject rocketPrefab;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -53,12 +59,18 @@ public class PlayerMovement : MonoBehaviour
                     Stuck = false;
                     // Disable slime for a while
                     if (LastSlime) LastSlime.Disable = true;
+                    reviveSpeed = true;
                 }
             }
         }
         else
         {
-            speed = OriginalSpeed;
+            if (reviveSpeed)
+            {
+                speed = OriginalSpeed;
+                reviveSpeed = false;
+            }
+            //speed = OriginalSpeed;
 
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
@@ -89,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!isRunning)
             {
-                speed = 12f;
+                speed = OriginalSpeed;
                 if (stamina < maxStamina)
                 {
                     stamina += Time.deltaTime;
@@ -99,8 +111,15 @@ public class PlayerMovement : MonoBehaviour
                     stamina = 5f;
                 }
             }
+            if (Input.GetKeyDown(KeyCode.Space) && ifRocket)
+            {
+                GameObject rocketObject = Instantiate(rocketPrefab);
+                rocketObject.transform.position = transform.position;
+                rocketObject.transform.forward = transform.forward;
+                ifRocket = false;
+            }
 
-            //Debug.Log(stamina+" "+speed);
+            Debug.Log(stamina+" "+speed);
         }
     }
 
@@ -121,6 +140,11 @@ public class PlayerMovement : MonoBehaviour
         {
             LastSlime = col.GetComponent<Slime>();
             Stuck = true;
+        }
+        else if(col.gameObject.tag == "Rocket"&&ifRocket==false)
+        {
+            ifRocket = true;
+            Destroy(col.gameObject);
         }
     }
 

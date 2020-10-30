@@ -15,6 +15,7 @@ public class CandyMonster : Monster
     //[SerializeField]
     //private Transform[] waypoints;
     //int currentWaypoint = 0;
+    private EnemyStates prevState;
 
     protected override void Start()
     {
@@ -24,6 +25,7 @@ public class CandyMonster : Monster
 
     void Update()
     {
+        
         if (Vector3.Distance(transform.position, objectToChase.position) > stopChaseDis)
         {
             if (currentState == EnemyStates.Chasing)
@@ -33,6 +35,16 @@ public class CandyMonster : Monster
                 monster.SetActive(false);
                 agent.velocity = Vector3.zero;
                 agent.enabled = false;
+            }
+        }
+        if(currentState == EnemyStates.stuck)
+        {
+            
+            agent.velocity = Vector3.zero;
+            stuckTime -= Time.deltaTime;
+            if (stuckTime <= 0)
+            {
+                currentState = prevState;
             }
         }
         else
@@ -46,6 +58,16 @@ public class CandyMonster : Monster
             }
             if (currentState == EnemyStates.Chasing)
                 agent.SetDestination(objectToChase.position);
+        }
+        //Debug.Log(currentState);
+    }
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "ShootRocket")
+        {
+            prevState = currentState;
+            currentState = EnemyStates.stuck;
+            Destroy(col.gameObject);
         }
     }
 
