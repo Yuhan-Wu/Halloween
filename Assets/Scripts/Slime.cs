@@ -7,19 +7,21 @@ public class Slime : MonoBehaviour
     public float DisableTime = 5;
     [SerializeField]
     private GameObject slime = null;
+    private Vector3 initSlimePos;
 
-    private void Update()
+    private void Start()
     {
+        initSlimePos = slime.transform.localPosition;
     }
 
     public void ShowSlime()
     {
-        slime.SetActive(true);
+        slime.transform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void Release()
     {
-        slime.SetActive(false);
+        slime.transform.localPosition = initSlimePos;
         GetComponent<Collider>().enabled = false;
         StartCoroutine(RestoreCollision());
     }
