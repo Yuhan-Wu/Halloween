@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
                     StrugglingCounter = 0;
                     Stuck = false;
                     // Disable slime for a while
-                    if (LastSlime) LastSlime.Disable = true;
+                    if (LastSlime) LastSlime.Release();
                     reviveSpeed = true;
                 }
             }
@@ -139,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
         else if(col.gameObject.tag == "Slime")
         {
             LastSlime = col.GetComponent<Slime>();
+            LastSlime.ShowSlime();
             Stuck = true;
         }
         else if(col.gameObject.tag == "Rocket"&&ifRocket==false)
