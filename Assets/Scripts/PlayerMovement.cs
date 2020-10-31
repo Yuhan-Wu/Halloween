@@ -31,13 +31,15 @@ public class PlayerMovement : MonoBehaviour
     private bool reviveSpeed = false;
 
     public GameObject rocketPrefab;
-    
+    private AudioSource soundEffect;
+    public AudioClip getCandySound;
 
     // Start is called before the first frame update
     void Start()
     {
         stamina = maxStamina;
         staminaBar.setMaxStamina(maxStamina);
+        soundEffect = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -135,7 +137,9 @@ public class PlayerMovement : MonoBehaviour
             stamina += 1f;
             candyCount++;
             Destroy(col.gameObject);
-            Debug.Log(candyCount);
+            soundEffect.clip = getCandySound;
+            soundEffect.Play();
+            //Debug.Log(candySound);
         }else if (col.gameObject.tag == "Fire" || col.gameObject.tag == "Spike")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -151,6 +155,7 @@ public class PlayerMovement : MonoBehaviour
             ifRocket = true;
             Destroy(col.gameObject);
         }
+       // candySound = false;
     }
 
     

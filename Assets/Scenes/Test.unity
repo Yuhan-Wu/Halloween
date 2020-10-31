@@ -9645,6 +9645,17 @@ PrefabInstance:
       propertyPath: StrugglingPrompt
       value: 
       objectReference: {fileID: 1236241893}
+    - target: {fileID: 1496737553546006006, guid: 972408f4b5f866b408a24068c4078f53,
+        type: 3}
+      propertyPath: getCandy
+      value: 
+      objectReference: {fileID: 2137825741054437990, guid: 6b56ed42d32c8334faf6ba62a10751d0,
+        type: 3}
+    - target: {fileID: 1496737553546006006, guid: 972408f4b5f866b408a24068c4078f53,
+        type: 3}
+      propertyPath: getCandySound
+      value: 
+      objectReference: {fileID: 8300000, guid: ee84ccb0547133646b9a73c737187b1a, type: 3}
     - target: {fileID: 1496737553546006007, guid: 972408f4b5f866b408a24068c4078f53,
         type: 3}
       propertyPath: m_LocalPosition.x

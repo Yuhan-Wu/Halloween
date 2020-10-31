@@ -17,6 +17,6 @@ public class CandyCount : MonoBehaviour
     void Update()
     {
         candyCount = GameObject.Find("Player").GetComponent<PlayerMovement>().candyCount;
-        candyCountText.text = "Candy: " + candyCount;
+        candyCountText.text = "Candy: " + candyCount+"/66";
     }
 }
