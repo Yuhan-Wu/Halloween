@@ -91,7 +91,7 @@ MonoBehaviour:
   stuckTime: 2
   candy: {fileID: 490363896727932396}
   monster: {fileID: 490363896956608479}
-  stopChaseDis: 30
+  stopChaseDis: 50
 --- !u!1 &490363896727932396
 GameObject:
   m_ObjectHideFlags: 0
