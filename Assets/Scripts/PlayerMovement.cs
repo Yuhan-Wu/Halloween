@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxStamina = 5f;
     public float stamina;
     public StaminaBar staminaBar;
+    public Text StrugglingPrompt;
     public bool Stuck = false;
     public float OriginalSpeed = 12f;
     public float StrugglingSpeed = 0.3f;
@@ -43,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Stuck)
         {
+            StrugglingPrompt.enabled = true;
             LastStrugglingTime += Time.deltaTime;
             speed = 0;
             if (LastStrugglingTime > StrugglingSpeed)
@@ -66,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            StrugglingPrompt.enabled = false;
             if (reviveSpeed)
             {
                 speed = OriginalSpeed;
