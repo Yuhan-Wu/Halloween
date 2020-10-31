@@ -9,7 +9,8 @@ public class Monster : MonoBehaviour
     {
         Idle,
         Chasing,
-        Patrolling
+        Patrolling,
+        stuck
     }
 
     protected EnemyStates currentState;
@@ -19,6 +20,8 @@ public class Monster : MonoBehaviour
     protected float startChaseDis = 10f;
     [SerializeField]
     protected Transform objectToChase = null;
+    [SerializeField]
+    protected float stuckTime = 2f;
 
     // Start is called before the first frame update
     protected virtual void Start()
