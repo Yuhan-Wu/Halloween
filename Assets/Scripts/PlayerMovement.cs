@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject rocketPrefab;
     
+    public AudioClip getCandySound;
 
     // Start is called before the first frame update
     void Start()
@@ -135,7 +136,9 @@ public class PlayerMovement : MonoBehaviour
             stamina += 1f;
             candyCount++;
             Destroy(col.gameObject);
-            Debug.Log(candyCount);
+            gameObject.GetComponent<AudioSource>().clip = getCandySound;
+            gameObject.GetComponent<AudioSource>().Play();
+            //Debug.Log(candySound);
         }else if (col.gameObject.tag == "Fire" || col.gameObject.tag == "Spike")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -151,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
             ifRocket = true;
             Destroy(col.gameObject);
         }
+       // candySound = false;
     }
 
     
