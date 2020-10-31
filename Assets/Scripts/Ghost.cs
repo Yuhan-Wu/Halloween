@@ -9,6 +9,8 @@ public class Ghost : Monster
     [SerializeField]
     private float moveSpeed = 2f;
     private bool activated = false;
+    [SerializeField]
+    private GameObject ghost = null;
 
     private void Start()
     {
@@ -35,7 +37,11 @@ public class Ghost : Monster
                 if (activated)
                 {
                     if (currentState == EnemyStates.Chasing)
+                    {
+                        ghost.SetActive(false);
                         currentState = EnemyStates.Idle;
+                        LevelManager.Instance.SwitchBGM(0);
+                    }
                     prevMirror = curMirror;
                     float minDis = Vector3.Distance(objectToChase.position, curMirror.transform.position);
                     foreach (GameObject mirror in LevelManager.Instance.EmptyMirrors)
@@ -59,8 +65,10 @@ public class Ghost : Monster
                 {
                     if (!activated)
                         activated = true;
+                    ghost.SetActive(true);
                     transform.position = curMirror.transform.Find("SpawnPoint").position;
                     currentState = EnemyStates.Chasing;
+                    LevelManager.Instance.SwitchBGM(1);
                 }
                 if (currentState == EnemyStates.Chasing)
                 {

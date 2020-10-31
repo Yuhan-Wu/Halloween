@@ -32,6 +32,7 @@ public class CandyMonster : Monster
                     monster.SetActive(false);
                     agent.velocity = Vector3.zero;
                     agent.enabled = false;
+                    LevelManager.Instance.SwitchBGM(0);
                 }
             }
             else
@@ -42,6 +43,7 @@ public class CandyMonster : Monster
                     candy.SetActive(false);
                     currentState = EnemyStates.Chasing;
                     agent.enabled = true;
+                    LevelManager.Instance.SwitchBGM(1);
                 }
                 if (currentState == EnemyStates.Chasing)
                     agent.SetDestination(objectToChase.position);

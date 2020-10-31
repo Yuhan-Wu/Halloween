@@ -9,6 +9,11 @@ public class LevelManager : MonoBehaviour
     private HashSet<GameObject> emptyMirrors;
     public HashSet<GameObject> EmptyMirrors => emptyMirrors;
 
+    private AudioSource levelBGM;
+    public AudioSource LevelBGM => levelBGM;
+    public AudioClip levelClip;
+    public AudioClip chaseClip;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,12 +28,29 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        levelBGM = gameObject.GetComponent<AudioSource>();
+        LevelBGM.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SwitchBGM(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                LevelBGM.clip = levelClip;
+                break;
+            case 1:
+                LevelBGM.clip = chaseClip;
+                break;
+            default:
+                return;
+        }
+        LevelBGM.Play();
     }
 }

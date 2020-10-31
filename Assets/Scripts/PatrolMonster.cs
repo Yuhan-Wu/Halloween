@@ -32,6 +32,7 @@ public class PatrolMonster : Monster
                 {
                     currentState = EnemyStates.Patrolling;
                     agent.speed = PatrolSpeed;
+                    LevelManager.Instance.SwitchBGM(0);
                 }
             }
             else
@@ -40,6 +41,7 @@ public class PatrolMonster : Monster
                 {
                     currentState = EnemyStates.Chasing;
                     agent.speed = ChasingSpeed;
+                    LevelManager.Instance.SwitchBGM(1);
                 }
                 if (currentState == EnemyStates.Chasing)
                     agent.SetDestination(objectToChase.position);

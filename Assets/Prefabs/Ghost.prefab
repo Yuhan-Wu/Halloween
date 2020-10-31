@@ -62,11 +62,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a59553c3c086ba47be8af7aedf45fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initState: 0
   startChaseDis: 10
   objectToChase: {fileID: 0}
   stuckTime: 2
   moveSpeed: 5
+  ghost: {fileID: 3458723653901346630}
 --- !u!65 &866332610952214851
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -160,12 +160,17 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2e0d286424781224eac02796b9394d71,
         type: 3}
       propertyPath: m_Name
-      value: board
+      value: ghost
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2e0d286424781224eac02796b9394d71,
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2e0d286424781224eac02796b9394d71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3321122811038795379, guid: 2e0d286424781224eac02796b9394d71,
         type: 3}
@@ -184,6 +189,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e0d286424781224eac02796b9394d71, type: 3}
+--- !u!1 &3458723653901346630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e0d286424781224eac02796b9394d71,
+    type: 3}
+  m_PrefabInstance: {fileID: 2539664084325554711}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2644750400639974908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2e0d286424781224eac02796b9394d71,
