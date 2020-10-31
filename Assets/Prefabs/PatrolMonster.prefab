@@ -86,15 +86,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946a15f31bf861b4285b391b81c52751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initState: 2
   startChaseDis: 10
   objectToChase: {fileID: 1496737553546006007, guid: 972408f4b5f866b408a24068c4078f53,
     type: 3}
+  stuckTime: 2
   stopChaseDis: 20
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
-  PatrolSpeed: 5
+  PatrolSpeed: 3
   ChasingSpeed: 10
 --- !u!65 &4285896657327866347
 BoxCollider:

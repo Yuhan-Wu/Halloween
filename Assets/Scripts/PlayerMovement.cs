@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
                 ifRocket = false;
             }
 
-            Debug.Log(stamina+" "+speed);
+            //Debug.Log(stamina+" "+speed);
         }
     }
 

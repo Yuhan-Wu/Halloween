@@ -10,24 +10,18 @@ public class Monster : MonoBehaviour
         Idle,
         Chasing,
         Patrolling,
-        stuck
+        Stuck
     }
 
     protected EnemyStates currentState;
-    [SerializeField]
-    protected EnemyStates initState;
     [SerializeField]
     protected float startChaseDis = 10f;
     [SerializeField]
     protected Transform objectToChase = null;
     [SerializeField]
     protected float stuckTime = 2f;
+    protected EnemyStates prevState;
 
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-        currentState = initState;
-    }
 
     // Update is called once per frame
     void Update()
@@ -41,6 +35,16 @@ public class Monster : MonoBehaviour
         {
             if (currentState == EnemyStates.Chasing)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ShootRocket"))
+        {
+            prevState = currentState;
+            currentState = EnemyStates.Stuck;
+            Destroy(other.gameObject);
         }
     }
 }

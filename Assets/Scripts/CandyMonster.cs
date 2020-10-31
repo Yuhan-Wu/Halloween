@@ -12,62 +12,49 @@ public class CandyMonster : Monster
     private GameObject monster = null;
     [SerializeField]
     private float stopChaseDis = 20f;
-    //[SerializeField]
-    //private Transform[] waypoints;
-    //int currentWaypoint = 0;
-    private EnemyStates prevState;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
+        currentState = EnemyStates.Idle;
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        
-        if (Vector3.Distance(transform.position, objectToChase.position) > stopChaseDis)
+        if (currentState != EnemyStates.Stuck)
         {
-            if (currentState == EnemyStates.Chasing)
+            if (Vector3.Distance(transform.position, objectToChase.position) > stopChaseDis)
             {
-                currentState = EnemyStates.Idle;
-                candy.SetActive(true);
-                monster.SetActive(false);
-                agent.velocity = Vector3.zero;
-                agent.enabled = false;
+                if (currentState == EnemyStates.Chasing)
+                {
+                    currentState = EnemyStates.Idle;
+                    candy.SetActive(true);
+                    monster.SetActive(false);
+                    agent.velocity = Vector3.zero;
+                    agent.enabled = false;
+                }
+            }
+            else
+            {
+                if (currentState == EnemyStates.Idle && Vector3.Distance(transform.position, objectToChase.position) < startChaseDis)
+                {
+                    monster.SetActive(true);
+                    candy.SetActive(false);
+                    currentState = EnemyStates.Chasing;
+                    agent.enabled = true;
+                }
+                if (currentState == EnemyStates.Chasing)
+                    agent.SetDestination(objectToChase.position);
             }
         }
-        if(currentState == EnemyStates.stuck)
+        else
         {
-            
             agent.velocity = Vector3.zero;
             stuckTime -= Time.deltaTime;
             if (stuckTime <= 0)
             {
                 currentState = prevState;
             }
-        }
-        else
-        {
-            if (currentState == EnemyStates.Idle && Vector3.Distance(transform.position, objectToChase.position) < startChaseDis)
-            {
-                monster.SetActive(true);
-                candy.SetActive(false);
-                currentState = EnemyStates.Chasing;
-                agent.enabled = true;
-            }
-            if (currentState == EnemyStates.Chasing)
-                agent.SetDestination(objectToChase.position);
-        }
-        //Debug.Log(currentState);
-    }
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.tag == "ShootRocket")
-        {
-            prevState = currentState;
-            currentState = EnemyStates.stuck;
-            Destroy(col.gameObject);
         }
     }
 
