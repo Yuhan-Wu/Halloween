@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour
 {
-    public bool Disable = false;
     public float DisableTime = 5;
     [SerializeField]
     private GameObject slime = null;
-
-    private bool isCoroutineExecuting = false;
 
     private void Update()
     {
@@ -18,7 +15,6 @@ public class Slime : MonoBehaviour
     public void ShowSlime()
     {
         slime.SetActive(true);
-        Debug.Log("slime appear");
     }
 
     public void Release()
