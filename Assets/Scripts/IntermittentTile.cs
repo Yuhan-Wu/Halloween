@@ -11,6 +11,8 @@ public class IntermittentTile : MonoBehaviour
     private bool Activated = true;
 
     private bool isCoroutineExecuting = false;
+    [SerializeField]
+    private GameObject body = null;
 
     // Update is called once per frame
     void Update()
@@ -29,7 +31,7 @@ public class IntermittentTile : MonoBehaviour
 
         Activated = !Activated;
         GetComponent<Collider>().enabled = Activated;
-        GetComponent<MeshRenderer>().enabled = Activated;
+        body.SetActive(Activated);
         isCoroutineExecuting = false;
         
     }

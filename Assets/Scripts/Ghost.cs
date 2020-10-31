@@ -14,6 +14,7 @@ public class Ghost : Monster
 
     private void Start()
     {
+        ghost.SetActive(false);
         float minDis = float.MaxValue;
         foreach (GameObject mirror in LevelManager.Instance.EmptyMirrors)
         {
