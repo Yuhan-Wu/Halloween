@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a59553c3c086ba47be8af7aedf45fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startChaseDis: 10
+  startChaseDis: 15
   objectToChase: {fileID: 0}
   stuckTime: 2
   moveSpeed: 5
