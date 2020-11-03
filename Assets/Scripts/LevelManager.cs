@@ -10,9 +10,16 @@ public class LevelManager : MonoBehaviour
     public HashSet<GameObject> EmptyMirrors => emptyMirrors;
 
     private AudioSource levelBGM;
-    public AudioSource LevelBGM => levelBGM;
+    private AudioSource loopSoundFX;
+    private AudioSource soundFX;
     public AudioClip levelClip;
     public AudioClip chaseClip;
+    public AudioClip heartBitClip;
+    public AudioClip getCandySound;
+
+    private int chasingMonsterNum = 0;
+    public GameObject RushText;
+    private bool initRush = false;
 
     private void Awake()
     {
@@ -23,13 +30,17 @@ public class LevelManager : MonoBehaviour
         }
         Instance = this;
         emptyMirrors = new HashSet<GameObject>(GameObject.FindGameObjectsWithTag("Mirror"));
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        levelBGM = gameObject.GetComponent<AudioSource>();
-        LevelBGM.Play();
+        levelBGM = gameObject.GetComponents<AudioSource>()[0];
+        levelBGM.clip = levelClip;
+        levelBGM.Play();
+        soundFX = gameObject.GetComponents<AudioSource>()[1];
+        loopSoundFX = gameObject.GetComponents<AudioSource>()[2];
     }
 
     // Update is called once per frame
@@ -43,14 +54,79 @@ public class LevelManager : MonoBehaviour
         switch (id)
         {
             case 0:
-                LevelBGM.clip = levelClip;
+                levelBGM.clip = levelClip;
                 break;
             case 1:
-                LevelBGM.clip = chaseClip;
+                levelBGM.clip = chaseClip;
                 break;
             default:
                 return;
         }
-        LevelBGM.Play();
+        levelBGM.Play();
+    }
+
+    public void PlaySoundFX(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                soundFX.clip = getCandySound;
+                break;
+            default:
+                return;
+        }
+        soundFX.Play();
+    }
+
+    public void PlayLoopSoundFX(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                loopSoundFX.clip = heartBitClip;
+                break;
+            default:
+                return;
+        }
+        loopSoundFX.Play();
+    }
+
+    public void StopLoopSoundFX()
+    {
+        loopSoundFX.Stop();
+    }
+
+    public void UpdateChase(bool add)
+    {
+        if (add)
+        {
+            if (chasingMonsterNum == 0)
+            {
+                SwitchBGM(1);
+                PlayLoopSoundFX(0);
+                if (!initRush)
+                {
+                    initRush = true;
+                    RushText.SetActive(true);
+                    StartCoroutine(HideRushText());
+                }
+            }
+            chasingMonsterNum++;
+        }
+        else
+        {
+            chasingMonsterNum--;
+            if (chasingMonsterNum == 0)
+            {
+                SwitchBGM(0);
+                StopLoopSoundFX();
+            }
+        }
+    }
+
+    private IEnumerator HideRushText()
+    {
+        yield return new WaitForSeconds(2f);
+        RushText.SetActive(false);
     }
 }

@@ -41,7 +41,7 @@ public class Ghost : Monster
                     {
                         ghost.SetActive(false);
                         currentState = EnemyStates.Idle;
-                        LevelManager.Instance.SwitchBGM(0);
+                        LevelManager.Instance.UpdateChase(false);
                     }
                     prevMirror = curMirror;
                     float minDis = Vector3.Distance(objectToChase.position, curMirror.transform.position);
@@ -69,7 +69,7 @@ public class Ghost : Monster
                     ghost.SetActive(true);
                     transform.position = curMirror.transform.Find("SpawnPoint").position;
                     currentState = EnemyStates.Chasing;
-                    LevelManager.Instance.SwitchBGM(1);
+                    LevelManager.Instance.UpdateChase(true);
                 }
                 if (currentState == EnemyStates.Chasing)
                 {

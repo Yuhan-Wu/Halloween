@@ -31,15 +31,12 @@ public class PlayerMovement : MonoBehaviour
     private bool reviveSpeed = false;
 
     public GameObject rocketPrefab;
-    private AudioSource soundEffect;
-    public AudioClip getCandySound;
 
     // Start is called before the first frame update
     void Start()
     {
         stamina = maxStamina;
         staminaBar.setMaxStamina(maxStamina);
-        soundEffect = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -89,8 +86,6 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift) && (stamina > 0))
             {
                 isRunning = true;
-
-
             }
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
@@ -137,8 +132,7 @@ public class PlayerMovement : MonoBehaviour
             stamina += 1f;
             candyCount++;
             Destroy(col.gameObject);
-            soundEffect.clip = getCandySound;
-            soundEffect.Play();
+            LevelManager.Instance.PlaySoundFX(0);
             //Debug.Log(candySound);
         }else if (col.gameObject.tag == "Fire" || col.gameObject.tag == "Spike")
         {
@@ -158,5 +152,5 @@ public class PlayerMovement : MonoBehaviour
        // candySound = false;
     }
 
-    
+
 }
